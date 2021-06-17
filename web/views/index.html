@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./src/webgazer.js" defer></script>
+    <script src="./src/app.js" defer></script>
+    <link rel="stypesheet" href="./css/index.css"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <title>Custom Tracker</title>
+  </head>
+  <body class="d-flex">
+    <main>
+        <div class="container">
+            <div class="webgazerVideoContainer">
+
+            </div>
+            <p id="description" style="position: absolute; top: 100px; right: 100px; z-index: 10; width: 400px;">
+                hi hi hi<br>
+                this is the only one place on the world wide web where you can animate a 3d girl with your eyes!<br>
+                <br>
+                how?<br>
+                It uses an eye tracking library WebGazer.js that detects where are you looking. The butterfly is a location of your gaze, the girl rotates her waist and head trying to watch on the butterfly.
+                <br>
+                To make it work, you have to train this model by clicking on stars that will appear after the start.
+                <br><br>
+            </p>
+            <div id="start_trigger" style="position: absolute; top: 300px; right: 140px; z-index: 10;">
+                <button id="start" value="0" onclick="buttonOperations(this)">start</button>
+              </div>
+              <p id="tip" style="position: absolute; top: 100px; right: 100px; z-index: 10; width: 400px; display: none;">
+                detailed tip<br>
+                1) Fit your face into a square. It will become green if your face will be detected.<br>
+                2) Focus on a star and click 7 times until it disappears. Repeat this action with remaining stars.<br>
+                3) Have fun c;
+              </p>
+              <div id="button_container">
+                <button style="position: absolute; top: 3%; left: 5%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 40%; left: 5%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 90%; left: 5%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+          
+                <button style="position: absolute; top: 3%; left: 90%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 40%; left: 90%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 90%; left: 90%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+          
+                <button style="position: absolute; top: 90%; left: 60%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 90%; left: 30%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 3%; left: 60%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+                <button style="position: absolute; top: 3%; left: 30%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+          
+                <button style="position: absolute; top: 40%; left: 48%; z-index: 9;" value="0" onclick="coll(this)">click</button>
+              </div>
+        </div>
+    </main>
+      
+  </body>
+</html>
