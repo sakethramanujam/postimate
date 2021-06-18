@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.webgazerVideoContainer{
+    top: 35% !important; 
+    right: 35% !important;
+}
+
+div #button_container{
+  display: none;
+}
+
+#button_container button {
+  background-size: cover;
+  height: 51px;
+  width: 67px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+#start {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+#tip-card{
+  position: absolute;
+  top: 45%;
+  right: 100px;
+  z-index: 10;
+}
