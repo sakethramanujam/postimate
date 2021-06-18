@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/js/webgazer.js" defer></script>
-    <script src="/js/app.js" defer></script>
+    <script type="module" src="/js/app.js" defer></script>
+    <script type="module" src="/js/indexdb.js" defer></script>
+    <script type="module" src="/js/settings.js" defer></script>
+    <script type="module" src="/js/button.js" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -51,7 +54,7 @@
           class="btn btn-lg btn-success"
           id="start"
           value="0"
-          onclick="buttonOperations(this)"
+          onclick="buttonop(this)"
         >
           Start Tracking
         </button>
@@ -80,7 +83,7 @@
           class="btn btn-primary"
           style="position: absolute; top: 3%; left: 5%; z-index: 9"
           value="0"
-          onclick="coll(this)"
+          onclick="colll(this)"
         >
           1
         </button>

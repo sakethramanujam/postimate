@@ -1,29 +1,14 @@
-let positions = [];
-let clickCounter = 0;
-let firstPoint = [{
-  "timestamp" : new Date().getTime(),
-    "xPos" : 0,
-    "yPos" : 0,
-    "elapsedTime": 0
-}]
-let date = new Date()
-let filename_base = String(date.getMonth()) + "_" + String(date.getDate()) 
+import database from "./indexdb.js";
+import {buttonOperations, coll} from "./button.js";
+import {dbName} from "./settings.js"
 
-function coll(element) {
-  //  console.log(element.value);
-  if (element.value < 3) {
-    element.value++;
-  } else {
-    element.style.display = "none";
-    clickCounter++;
-    if (clickCounter === 11) {
-      document.getElementById("tip-card").style.display = "none";
-      pushData(firstPoint);
-    }
-  }
-}
 
-function buttonOperations(button) {
+let db = new database(dbName)
+db.createDB()
+
+let colll = coll(element);
+let buttonop = buttonOperations(button)
+/* function buttonOperations(button) {
   if (button.value == 0) {
     button.value = 1;
     webgazer.resume()
@@ -45,7 +30,7 @@ function buttonOperations(button) {
         positions.push(position);
         if (positions.length === 10){
           console.log("Writing eye tracking data to IndexDB...");
-          pushData(positions);
+          db.pushData(positions);
           positions = [];
         }
 
@@ -61,10 +46,9 @@ function buttonOperations(button) {
     document.getElementById("tip-card").style.display = "none";
   }
 }
+ */
 
-const dbName = "gaze_data";
-const objStName = "EyePos"
-createDB(dbName);
+/* createDB(dbName);
 function createDB(dbName){
   clearData();
   let request = indexedDB.open(dbName, 1);
@@ -144,8 +128,6 @@ function exportToJsonFile(jsonData) {
   console.log("Saving "+jsonData.length+" datapoints to " + exportFileDefaultName);
 }
 
-"use strict";
-
 function parseJSONToCSVStr(jsonData) {
     if(jsonData.length == 0) {
         return '';
@@ -182,4 +164,4 @@ function exportToCsvFile(jsonData) {
   linkElement.setAttribute('href', dataUri);
   linkElement.setAttribute('download', exportFileDefaultName);
   linkElement.click();
-}
+} */
