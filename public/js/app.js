@@ -44,7 +44,7 @@ function buttonOperations(button) {
         }
         positions.push(position);
         if (positions.length === 10){
-          console.log(positions);
+          console.log("Writing eye tracking data to IndexDB...");
           pushData(positions);
           positions = [];
         }
