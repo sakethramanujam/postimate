@@ -6,6 +6,8 @@ let firstPoint = [{
     "yPos" : 0,
     "elapsedTime": 0
 }]
+let date = new Date()
+let filename_base = String(date.getMonth()) + "_" + String(date.getDate()) 
 
 function coll(element) {
   //  console.log(element.value);
@@ -133,7 +135,7 @@ function exportToJsonFile(jsonData) {
   let dataStr = JSON.stringify(jsonData);
   let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
 
-  let exportFileDefaultName = "experiment_"+new Date().getUTCDate()+".json";
+  let exportFileDefaultName = "experiment_"+filename_base+".json";
 
   let linkElement = document.createElement('a');
   linkElement.setAttribute('href', dataUri);
@@ -174,7 +176,7 @@ function exportToCsvFile(jsonData) {
   let csvStr = parseJSONToCSVStr(jsonData);
   let dataUri = 'data:text/csv;charset=utf-8,'+ csvStr;
 
-  let exportFileDefaultName = "experiment_"+new Date().getUTCDate()+".csv";
+  let exportFileDefaultName = "experiment_"+filename_base+".csv";
 
   let linkElement = document.createElement('a');
   linkElement.setAttribute('href', dataUri);
