@@ -5,10 +5,11 @@ window.requestAnimationFrame =
         window.msRequestAnimationFrame;
 
 window.saveDataAcrossSessions = true;
-let imageEl = getNewImage();
+let imageEl = getNewImage("img-1");
+let imageEl2 = getNewImage("img-2");
 
-function getNewImage(){
-    const img = document.getElementById("img");
+function getNewImage(imgId){
+    const img = document.getElementById(imgId);
     img.src = "https://picsum.photos/1000?" + Math.random();
     img.style.position = "absolute";
 }

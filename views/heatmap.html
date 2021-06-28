@@ -15,15 +15,30 @@
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
       crossorigin="anonymous"
     />
-    <link href="/css/heatmap.css" rel="stylesheet">
+    <link href="/css/heatmap.css" rel="stylesheet" />
     <title>Heatmap</title>
   </head>
   <body>
     <!-- <div class="container">
         <button class="btn btn-primary">Something</button>
     </div> -->
-    <canvas id="canvas" width="1000" height="700" z-index="100"></canvas>
-    <img id="img">
+    <canvas
+      id="canvas"
+      width="1000"
+      height="700"
+      z-index="100"
+    ></canvas>
+    <div class="container" id="image-container">
+      <div class="row">
+        <div class="col">
+          <img id="img-1" />
+        </div>
+        <div class="col">
+          <img id="img-2" />
+        </div>
+      </div>
+
+    </div>
     <script src="/js/simpleheat.js" defer></script>
     <script src="/js/heatmap.js" defer></script>
   </body>

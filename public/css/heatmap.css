@@ -5,10 +5,16 @@ body {
   overflow: hidden; 
 }
 
+canvas{
+  position: fixed;
+}
+
+#image-container{
+  z-index: -1;
+}
 
 img{
   width: 50vw;
   height: 100vh;
   object-fit: cover;
-  z-index: -10;
 }
