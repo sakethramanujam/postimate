@@ -1,3 +1,4 @@
+const { request } = require("express");
 const express = require("express");
 const app = express();
 
@@ -6,11 +7,17 @@ const app = express();
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
+app.get("/", (request, response)=>{
   response.sendFile(__dirname + "/views/index.html");
+})
+
+app.get("/calibration", (request, response) => {
+  response.sendFile(__dirname + "/views/calibration.html");
 });
 
+app.get("/heatmap", (request, response)=>{
+  response.sendFile(__dirname + "/views/heatmap.html");
+})
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 3000, () => {
