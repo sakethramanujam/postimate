@@ -3,8 +3,6 @@ const express = require("express");
 const app = express();
 
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
 app.get("/", (request, response)=>{
