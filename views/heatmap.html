@@ -19,26 +19,57 @@
     <title>Heatmap</title>
   </head>
   <body>
-    <!-- <div class="container">
-        <button class="btn btn-primary">Something</button>
-    </div> -->
-    <canvas
-      id="canvas"
-      width="1000"
-      height="700"
-      z-index="100"
-    ></canvas>
-    <div class="container" id="image-container">
-      <div class="row">
-        <div class="col">
-          <img id="img-1" />
-        </div>
-        <div class="col">
-          <img id="img-2" />
+    <div class="container">
+      <header
+        class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
+      >
+        <a
+          href="/"
+          class="
+            navbar-brand
+            d-flex
+            align-items-center
+            mb-3 mb-md-0
+            me-md-auto
+            text-dark text-decoration-none
+          "
+        >
+          <span>
+            <img
+              class="mx-auto mb-4"
+              src="https://cem.phoenixeffect.me/psycopy/images/logo.png"
+              alt=""
+              width="50px"
+            />
+          </span>
+          <span class="fs-4">Gaze Tracker</span>
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="/calibration" class="nav-link">Calibration</a>
+          </li>
+          <li class="nav-item">
+            <a href="/heatmap" class="nav-link active" aria-current="page"
+              >Heatmap Generator</a
+            >
+          </li>
+        </ul>
+      </header>
+    </div>
+    <main>
+      <canvas id="canvas" width="1000" height="700" z-index="100"></canvas>
+      <div class="container" id="image-container" z-index="-1">
+        <div class="row">
+          <div class="col">
+            <img class="img-item" id="img-1" />
+          </div>
+          <div class="col">
+            <img class="img-item" id="img-2" />
+          </div>
         </div>
       </div>
-
-    </div>
+    </main>
     <script src="/js/simpleheat.js" defer></script>
     <script src="/js/heatmap.js" defer></script>
   </body>
