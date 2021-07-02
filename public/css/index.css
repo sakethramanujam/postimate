@@ -5,16 +5,11 @@ body {
   justify-content: center;
 }
 
-.webgazerVideoContainer{
-    top: 35% !important; 
-    right: 35% !important;
-}
-
 div #button_container{
   display: none;
 }
 
-#button_container button {
+#calibrationDiv button {
   background-size: cover;
   height: 51px;
   width: 67px;
@@ -43,4 +38,17 @@ div #button_container{
   top: 45%;
   right: 100px;
   z-index: 10;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+#controls{
+  top:60vh;
 }

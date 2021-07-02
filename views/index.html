@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      href="/css/index.css"
+      rel="stylesheet"
+    />
     <title>Postimate | Custom Tracker</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <main>
+      <div class="container px-4 py-5 my-5 text-center">
+        <img
+          class="d-block mx-auto mb-4"
+          src="https://cem.phoenixeffect.me/psycopy/images/logo.png"
+          alt=""
+          width="200px"
+        />
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">
+            Simple Web Application to study usergaze with webgazer.js &
+            simpleheat.js
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="/calibration"
+              ><button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+                Calibrate Camera
+              </button></a
+            >
+            <a href="/heatmap"
+              ><button
+                type="button"
+                class="btn btn-outline-secondary btn-lg px-4"
+              >
+                Heatmap Generator
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <span class="text-muted">&copy 2021 Copyrights Reserved - ASU Bio Design Institute.</span>
+      </div>
+    </footer>
+    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
 </html>
