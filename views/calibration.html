@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/js/webgazer.js" defer></script>
     <script src="/js/calibrate.js" defer></script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -28,159 +31,264 @@
     />
     <title>Postimate | Calibration Page</title>
   </head>
-  <body class="d-flex">
-    <div
-      class="container"
-      id="webgazerVideoContainer-bg"
-      style="
-        background-color: grey;
-        height: 240px;
-        width: 320px;
-        top: 15%;
-        left: 39%;
-        position: fixed;
-        border-radius: 10px;
-      "
-    ></div>
+  <body>
     <div class="container">
-      <div
-        id="start_trigger"
-        style="position: absolute; top: 60%; left: 40%; z-index: 10"
+      <header
+        class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
       >
-        <button
-          class="btn btn-lg btn-success"
-          id="start"
-          value="0"
-          onclick="buttonOperations(this)"
+        <a
+          href="/"
+          class="
+            d-flex
+            align-items-center
+            mb-3 mb-md-0
+            me-md-auto
+            text-dark text-decoration-none
+          "
         >
-          Start Tracking
-        </button>
-        
-        <button
-          class="btn btn-lg btn-primary"
-          id="start"
-          value="0"
-          style="margin-left: 1em;"
-          onclick="gazedb.getData('json')"
-        >
-        <i class="fa fa-download"></i> json
-        </button>
-        <button
-          class="btn btn-lg btn-primary"
-          id="start"
-          value="0"
-          style="margin-left: 1em;"
-          onclick="gazedb.getData('csv')"
-        >
-        <i class="fa fa-download"></i> csv
-        </button>
-      </div>
-      <div id="button_container" style="display: none">
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 3%; left: 5%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          1
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 3%; left: 35%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          2
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 3%; left: 65%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          3
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 3%; left: 95%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          4
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 36%; left: 5%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          5
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 36%; left: 35%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          6
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 36%; left: 65%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          7
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 36%; left: 95%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          8
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 69%; left: 5%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          9
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 69%; left: 35%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          10
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 69%; left: 65%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          11
-        </button>
-        <button
-          class="btn btn-primary"
-          style="position: absolute; top: 69%; left: 95%; z-index: 9"
-          value="0"
-          onclick="coll(this)"
-        >
-          12
-        </button>
-      </div>
-      <div class="card" id="tip-card" style="display: none; top: 60%">
-        <div class="card-body">
-          <div class="card-header">Tip</div>
-          1) Fit your face into a square. It will become green if your face will
-          be detected.<br />
-          2) Focus on a button and click 5 times until it disappears. Repeat
-          this action with remaining buttons.<br />
+          <span>
+            <img
+              class="mx-auto mb-4"
+              src="https://cem.phoenixeffect.me/psycopy/images/logo.png"
+              alt=""
+              width="50px"
+            />
+          </span>
+          <span class="fs-4">Postimate</span>
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="/calibration" class="nav-link active" aria-current="page"
+              >Calibration</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/heatmap" class="nav-link">Heatmap Generator</a>
+          </li>
+        </ul>
+      </header>
+    </div>
+    <main>
+      <div class="px-4 my-4 text-center">
+        <div class="col-lg-6 mx-auto">
+          <div
+            class="d-block mx-auto mb-4"
+            id="webgazerVideoContainer-bg"
+            style="
+              background-color: grey;
+              height: 240px;
+              width: 320px;
+              position: fixed;
+              border-radius: 10px;
+              display: none !important;
+            "
+          ></div>
         </div>
+        <div class="col-lg-6 mx-auto">
+          <div class="px-4 py-4 my-4 text-center">
+            <div
+              class="d-grid d-sm-flex justify-content-sm-center"
+              id="controls"
+            >
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Button group with nested dropdown"
+              >
+                <button
+                  class="btn btn-lg btn-outline-success px-4 gap-3"
+                  id="start_stop"
+                  value="0"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="left"
+                  title="Click Here to Start Calibration"
+                >
+                  Start Calibration
+                </button>
+                <button
+                  class="btn btn-lg btn-outline-success px-4 gap-3"
+                  id="start_stop"
+                  value="0"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="left"
+                  title="Click Here to Show Calibration Accuracy"
+                >
+                  Show Accuracy
+                </button>
+
+                <button
+                  class="
+                    btn btn-lg btn-outline-secondary btn-default
+                    px-4
+                    gap-3
+                  "
+                  id="download_json"
+                  onclick="gazedb.getData('json')"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Download Tracking Data as JSON"
+                >
+                  <i class="fa fa-download"></i> json
+                </button>
+                <button
+                  class="btn btn-lg btn-outline-secondary px-4"
+                  id="download_csv"
+                  value="0"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="left"
+                  title="Click Tracking Data as CSV"
+                >
+                  <i class="fa fa-download"></i> csv
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mx-auto">
+          <div class="px-1 py-1 my-1 text-center">
+            <div class="d-grid d-sm-flex gap-2 justify-content-sm-center">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="videoToggle"
+                />
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >Show Video</label
+                >
+              </div>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="faceOverlay"
+                />
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >Show Face Overlay</label
+                >
+              </div>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="faceFeedback"
+                />
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >Show Face Feedback</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="calibrationDiv" style="display: none">
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 3%; left: 5%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        1
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 3%; left: 35%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        2
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 3%; left: 65%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        3
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 3%; left: 95%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        4
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 36%; left: 5%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        5
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 36%; left: 35%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        6
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 36%; left: 65%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        7
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 36%; left: 95%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        8
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 69%; left: 5%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        9
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 69%; left: 35%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        10
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 69%; left: 65%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        11
+      </button>
+      <button
+        class="btn btn-primary"
+        style="position: absolute; top: 69%; left: 95%; z-index: 9"
+        value="0"
+        onclick="coll(this)"
+      >
+        12
+      </button>
+    </div>
+    <div class="card" id="tip-card" style="display: none; top: 60%">
+      <div class="card-body">
+        <div class="card-header">Tip</div>
+        1) Fit your face into a square. It will become green if your face will
+        be detected.<br />
+        2) Focus on a button and click 5 times until it disappears. Repeat this
+        action with remaining buttons.<br />
       </div>
     </div>
   </body>

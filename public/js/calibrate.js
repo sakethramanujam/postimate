@@ -7,7 +7,7 @@ let dbName = "gaze_data";
 class database {
   constructor(dbName) {
     this.dbName = dbName;
-    this.objStName = "";
+    this.objStName = null;
     if (dbName === "gaze_data") {
       this.objStName = "eyePos";
     } else if (dbName === "localforage") {
@@ -66,8 +66,8 @@ class database {
     };
   }
 
-  getData(event) {
-    let srcEl = event.source || event.target;
+  getData(click) {
+    let srcEl = click.source || click.target;
     let id = srcEl.getAttribute("id");
     let filetype = "";
     if (id === "download_json") {
@@ -156,22 +156,13 @@ function _exportToCsvFile(jsonData) {
 
 let gazedb = new database(dbName);
 
-window.saveDataAcrossSessions = false;
-window.onload = async function () {
-  gazedb.createDB();
-  if (!window.saveDataAcrossSessions) {
-    /* let localstorageDatalabel = 'webgazerGlobalData';
-    localforage.setItem(localstorageDatalabel, null);
-    let localstorageSettingslabel = 'webgazerGlobalSettings';
-    localforage.setItem(localstorageSettingslabel, null); */
-  }
-};
+
 
 window.onbeforeunload = function () {
   if (window.saveDataAcrossSessions) {
     webgazer.end();
   } else {
-    gazedb.clearData();
+    //gazedb.clearData();
   }
 };
 
@@ -183,57 +174,88 @@ function coll(element) {
     clickCounter++;
     if (clickCounter === 11) {
       document.getElementById("tip-card").style.display = "none";
-      let firstPoint = [{
-        "timestamp" : new Date().getTime(),
-          "xPos" : 0,
-          "yPos" : 0,
-          "elapsedTime": 0
-      }]
+      let firstPoint = [
+        {
+          timestamp: new Date().getTime(),
+          xPos: 0,
+          yPos: 0,
+          elapsedTime: 0,
+        },
+      ];
       gazedb.pushData(firstPoint);
     }
   }
 }
 
-function buttonOperations(button) {
+window.saveDataAcrossSessions = false;
+window.onload = async function () {
+  gazedb.createDB();
+  if (!window.saveDataAcrossSessions) {
+    /* let localstorageDatalabel = 'webgazerGlobalData';
+    localforage.setItem(localstorageDatalabel, null);
+    let localstorageSettingslabel = 'webgazerGlobalSettings';
+    localforage.setItem(localstorageSettingslabel, null); */
+  }
+};
+async function startStop(event) {
+  let videoToggle = document.getElementById("videoToggle");
+  let faceOverlay = document.getElementById("faceOverlay");
+  let faceFeedback = document.getElementById("faceFeedback");
+  let videoToggleState = videoToggle.checked;
+  let overlayState = faceOverlay.checked;
+  let feedbackState = faceFeedback.checked;
+  let button = event.source || event.target;
   if (button.value == 0) {
     button.value = 1;
-    webgazer.resume()
-    document.getElementById("button_container").style.display = "block";
+    webgazer.resume();
+    document.getElementById("calibrationDiv").style.display = "block";
     document.getElementById("tip-card").style.display = "block";
-    button.innerHTML = "Stop Tracking";
-    button.className = "btn btn-lg btn-danger"
-    webgazer
+    button.innerHTML = "Stop Calibration";
+    button.className = "btn btn-lg btn-danger";
+    await webgazer
       .setGazeListener(function (data, elapsedTime) {
         if (data == null) {
           return;
         }
-        let x = data.x
-        let y = data.y
-        console.log(x,y);
+        let x = data.x;
+        let y = data.y;
+        //console.log(x, y);
         let position = {
-        "timestamp" : new Date().getTime(),
-        "xPos" : x,
-        "yPos" : y,
-        "elapsedTime": elapsedTime
-        }
+          timestamp: new Date().getTime(),
+          xPos: x,
+          yPos: y,
+          elapsedTime: elapsedTime,
+        };
         positions.push(position);
-        if (positions.length === 10){
+        if (positions.length === 10) {
           console.log("Writing eye tracking data to IndexDB...");
           gazedb.pushData(positions);
           positions = [];
         }
-
       })
-      .setRegression('ridge')
-      .setTracker('TFFacemesh')
+      .setRegression("ridge")
+      .setTracker("TFFacemesh")
+      .showFaceOverlay(overlayState)
+      .showVideo(videoToggleState)
       .begin();
   } else if (button.value == 1) {
-    webgazer.pause();
+    webgazer.end();
     //webgazer.stopVideo();
-    button.innerHTML = "Start Tracking";
-    button.className = "btn btn-lg btn-success"
+    button.innerHTML = "Start Calibration";
+    button.className = "btn btn-lg btn-success";
     button.value = 0;
     document.getElementById("button_container").style.display = "none";
     document.getElementById("tip-card").style.display = "none";
   }
 }
+
+
+
+
+
+let startEl = document.getElementById("start_stop");
+let downJson = document.getElementById("download_json");
+let downCSV = document.getElementById("download_csv");
+startEl.onclick = startStop;
+downJson.onclick = gazedb.getData;
+downCSV.onclick = gazedb.getData;
