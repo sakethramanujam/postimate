@@ -1,20 +1,19 @@
+body, html { margin: 0px;}
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-canvas{
-  position: fixed;
+#controls {
+  z-index: 110;
+  position: relative;
 }
 
-#image-container{
+
+#image-container {
   z-index: -1;
 }
 
-.img-item{
-  width: 50vw;
-  height: 100vh;
+.img-item {
+  width: 100%;
   object-fit: cover;
 }

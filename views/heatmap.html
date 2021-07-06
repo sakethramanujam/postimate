@@ -21,7 +21,7 @@
   <body>
     <div class="container">
       <header
-        class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
+        class="d-flex flex-wrap justify-content-center py-3 border-bottom"
       >
         <a
           href="/"
@@ -58,7 +58,8 @@
       </header>
     </div>
     <main>
-      <canvas id="canvas" width="1000" height="700" z-index="100"></canvas>
+      
+      <canvas id="plotting_canvas" style="position:fixed; display: none;"></canvas>
       <div class="container" id="image-container" z-index="-1">
         <div class="row">
           <div class="col">
@@ -66,6 +67,41 @@
           </div>
           <div class="col">
             <img class="img-item" id="img-2" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mx-auto" id="controls" z-index="100">
+        <div class="px-4 py-4 my-4 text-center">
+          <div
+            class="d-grid d-sm-flex justify-content-sm-center"
+            id="controls"
+          >
+            <div
+              class="btn-group"
+              role="group"
+            >
+              <button
+                class="btn btn-lg btn-outline-success px-4 gap-3"
+                id="start_stop"
+                value="0"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Click Here to Start Recording Gaze"
+              >
+                Start Tracking
+              </button>
+              <button
+                class="btn btn-lg btn-outline-info px-4 gap-3"
+                id="screenshot"
+                value="0"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Click To Capture Screenshot"
+              >
+                Download Heatmap
+              </button>
+              
+            </div>
           </div>
         </div>
       </div>
