@@ -167,13 +167,12 @@ window.onbeforeunload = function () {
 };
 
 function coll(element) {
-  if (element.value < 3) {
+  if (element.value < 4) {
     element.value++;
   } else {
     element.style.display = "none";
     clickCounter++;
-    if (clickCounter === 11) {
-      document.getElementById("tip-card").style.display = "none";
+    if (clickCounter === 12) {
       let firstPoint = [
         {
           timestamp: new Date().getTime(),
@@ -209,7 +208,6 @@ async function startStop(event) {
     button.value = 1;
     webgazer.resume();
     document.getElementById("calibrationDiv").style.display = "block";
-    document.getElementById("tip-card").style.display = "block";
     button.innerHTML = "Stop Calibration";
     button.className = "btn btn-lg btn-danger";
     await webgazer
@@ -244,8 +242,7 @@ async function startStop(event) {
     button.innerHTML = "Start Calibration";
     button.className = "btn btn-lg btn-success";
     button.value = 0;
-    document.getElementById("button_container").style.display = "none";
-    document.getElementById("tip-card").style.display = "none";
+    document.getElementById("calibrationDiv").style.display = "none";
   }
 }
 
