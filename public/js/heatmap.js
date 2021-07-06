@@ -66,13 +66,19 @@ async function startStop(event) {
       .begin();
   } else if (button.value == 1) {
     webgazer.end();
-    let canvas = get("plotting_canvas");
-    canvas.style.display = "block";
     button.innerHTML = "Start Tracking";
     button.className = "btn btn-lg btn-success";
+    showHeatmap.disabled = false;
     button.value = 0;
   }
 }
 
+function showHeat(e){
+    let canvas = get("plotting_canvas");
+    canvas.style.display = "block";
+}
+
 let startEl = document.getElementById("start_stop");
+let showHeatmap = document.getElementById("showhm");
 startEl.onclick = startStop;
+showHeatmap.onclick = showHeat;
