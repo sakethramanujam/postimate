@@ -1,7 +1,5 @@
 body, html { margin: 0px;}
-body {
-  overflow: hidden;
-}
+
 
 #controls {
   z-index: 110;
