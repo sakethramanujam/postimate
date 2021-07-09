@@ -162,18 +162,19 @@ window.onbeforeunload = function () {
   if (window.saveDataAcrossSessions) {
     webgazer.end();
   } else {
-    //gazedb.clearData();
+    gazedb.clearData();
   }
 };
 
 function coll(element) {
+  
   if (element.value < 4) {
     element.value++;
   } else {
     element.style.display = "none";
     clickCounter++;
-    if (clickCounter === 12) {
-      let firstPoint = [
+    if (clickCounter === 8) {
+      /* let firstPoint = [
         {
           timestamp: new Date().getTime(),
           xPos: 0,
@@ -181,36 +182,56 @@ function coll(element) {
           elapsedTime: 0,
         },
       ];
-      gazedb.pushData(firstPoint);
+        gazedb.pushData(firstPoint); */
+        let btn7 = document.getElementById("pt6");
+        btn7.style.display = "block";
+        var canvas = document.getElementById("plotting_canvas");
+        canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        swal({
+          title: "Calculating measurement",
+          text: "Please don't move your mouse & stare at the middle button for the next 5 seconds. This will allow us to calculate the accuracy of our predictions.",
+          closeOnEsc: false,
+          allowOutsideClick: false,
+          closeModal: true
+        }).then( isConfirm => {
+                  $(document).ready(function(){
+                  store_points_variable(); // start storing the prediction points
+                  sleep(5000).then(() => {
+                      stop_storing_points_variable(); // stop storing the prediction points
+                      var past50 = webgazer.getStoredPoints(); // retrieve the stored points
+                      var precision_measurement = calculatePrecision(past50);
+                      var accuracyLabel = "<a>Accuracy | "+precision_measurement+"%</a>";
+                      //document.getElementById("Accuracy").innerHTML = accuracyLabel; // Show the accuracy in the nav bar.
+                      swal({
+                        title: "Your accuracy measure is " + precision_measurement + "%",
+                        allowOutsideClick: false,
+                        buttons: {
+                          cancel: "Recalibrate",
+                          confirm: true,
+                        }})
+                      })})})
+
+      
     }
   }
+    }
+
+function showCalibPoints(){
+  document.getElementById("calibrationDiv").style.display = "block";
 }
 
-window.saveDataAcrossSessions = false;
+window.saveDataAcrossSessions = true;
 window.onload = async function () {
   gazedb.createDB();
+  setupCanvas();
   if (!window.saveDataAcrossSessions) {
-    /* let localstorageDatalabel = 'webgazerGlobalData';
+    let localstorageDatalabel = 'webgazerGlobalData';
     localforage.setItem(localstorageDatalabel, null);
     let localstorageSettingslabel = 'webgazerGlobalSettings';
-    localforage.setItem(localstorageSettingslabel, null); */
+    localforage.setItem(localstorageSettingslabel, null);
   }
-};
-async function startStop(event) {
-  let videoToggle = document.getElementById("videoToggle");
-  let faceOverlay = document.getElementById("faceOverlay");
-  let faceFeedback = document.getElementById("faceFeedback");
-  let videoToggleState = videoToggle.checked;
-  let overlayState = faceOverlay.checked;
-  let feedbackState = faceFeedback.checked;
-  let button = event.source || event.target;
-  if (button.value == 0) {
-    button.value = 1;
-    webgazer.resume();
-    document.getElementById("calibrationDiv").style.display = "block";
-    button.innerHTML = "Stop Calibration";
-    button.className = "btn btn-lg btn-danger";
-    await webgazer
+    webgazer.params.showVideoPreview = true;
+    await webgazer.setRegression('ridge')
       .setGazeListener(function (data, elapsedTime) {
         if (data == null) {
           return;
@@ -218,41 +239,35 @@ async function startStop(event) {
         let x = data.x;
         let y = data.y;
         //console.log(x, y);
-        let position = {
+        /* let position = {
           timestamp: new Date().getTime(),
           xPos: x,
           yPos: y,
           elapsedTime: elapsedTime,
         };
-        positions.push(position);
+        //positions.push(position);
         if (positions.length === 10) {
           console.log("Writing eye tracking data to IndexDB...");
           gazedb.pushData(positions);
           positions = [];
-        }
+        } */
       })
-      .setRegression("ridge")
-      .setTracker("TFFacemesh")
-      .showFaceOverlay(overlayState)
-      .showVideo(videoToggleState)
+      .saveDataAcrossSessions(true)
       .begin();
-  } else if (button.value == 1) {
-    webgazer.end();
-    //webgazer.stopVideo();
-    button.innerHTML = "Start Calibration";
-    button.className = "btn btn-lg btn-success";
-    button.value = 0;
-    document.getElementById("calibrationDiv").style.display = "none";
-  }
+      webgazer.showVideoPreview(true).showPredictionPoints(true)
+      .applyKalmanFilter(true)
+};
+
+
+function setupCanvas(){
+  var canvas = document.getElementById("plotting_canvas");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.position = 'fixed';
+  canvas.style.zIndex = 9;
 }
 
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 
-
-
-
-let startEl = document.getElementById("start_stop");
-let downJson = document.getElementById("download_json");
-let downCSV = document.getElementById("download_csv");
-startEl.onclick = startStop;
-downJson.onclick = gazedb.getData;
-downCSV.onclick = gazedb.getData;

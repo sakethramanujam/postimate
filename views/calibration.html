@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/js/webgazer.js" defer></script>
     <script src="/js/calibrate.js" defer></script>
+    <script src="/js/precision_calc.js" defer></script>
+    <script src="/js/precision_store.js" defer></script>
+    <script src="/js/sweetalert.min.js" defer></script>
     <link
       href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
@@ -38,6 +41,12 @@
     </script>
   </head>
   <body>
+    <canvas
+      id="plotting_canvas"
+      width="500"
+      height="500"
+      style="cursor: crosshair"
+    ></canvas>
     <div class="container">
       <header
         class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
@@ -53,12 +62,12 @@
           "
         >
           <span>
-            <img
+            <!-- <img
               class="mx-auto mb-4"
               src="https://cem.phoenixeffect.me/psycopy/images/logo.png"
               alt=""
               width="50px"
-            />
+            /> -->
           </span>
           <span class="fs-4">Postimate</span>
         </a>
@@ -76,22 +85,8 @@
       </header>
     </div>
     <main>
-      <div class="px-4 my-4 text-center">
-        <div class="col-lg-6 mx-auto">
-          <div
-            class="d-block mx-auto mb-4"
-            id="webgazerVideoContainer-bg"
-            style="
-              background-color: grey;
-              height: 240px;
-              width: 320px;
-              position: fixed;
-              border-radius: 10px;
-              display: none !important;
-            "
-          ></div>
-        </div>
-        <div class="col-lg-6 mx-auto">
+      <!-- <div class="px-4 my-4 text-center">
+        <div class="col-lg-6 mx-auto" z-index=10>
           <div class="px-4 py-4 my-4 text-center">
             <div
               class="d-grid d-sm-flex justify-content-sm-center"
@@ -100,12 +95,12 @@
               <div
                 class="btn-group"
                 role="group"
-                aria-label="Button group with nested dropdown"
+                aria-label="Start Stop Trigger"
               >
                 <button
                   class="btn btn-lg btn-outline-success px-4 gap-3"
                   id="start_stop"
-                  value="0"
+                  value="1"
                   data-bs-toggle="tooltip"
                   data-bs-placement="left"
                   title="Click Here to Start Calibration"
@@ -155,7 +150,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </main>
 
     <div id="calibrationDiv" style="display: none">
@@ -179,7 +174,7 @@
       </button>
       <button
         class="btn btn-primary"
-        style="position: absolute; top: 3%; left: 65%; z-index: 9"
+        style="position: absolute; top: 3%; left: 95%; z-index: 9"
         value="0"
         id="pt3"
         onclick="coll(this)"
@@ -188,34 +183,32 @@
       </button>
       <button
         class="btn btn-primary"
-        style="position: absolute; top: 3%; left: 95%; z-index: 9"
+        style="position: absolute; top: 50%; left: 5%; z-index: 9"
         value="0"
         id="pt4"
         onclick="coll(this)"
       >
         4
       </button>
-      <button
+
+      <span
         class="btn btn-primary"
-        style="position: absolute; top: 36%; left: 5%; z-index: 9"
-        value="0"
-        id="pt5"
-        onclick="coll(this)"
-      >
-        5
-      </button>
-      <button
-        class="btn btn-primary"
-        style="position: absolute; top: 36%; left: 35%; z-index: 9"
+        style="
+          position: absolute;
+          top: 50vh;
+          left: 50vw;
+          z-index: 9;
+          display: none;
+        "
         value="0"
         id="pt6"
         onclick="coll(this)"
       >
         6
-      </button>
+    </span>
       <button
         class="btn btn-primary"
-        style="position: absolute; top: 36%; left: 65%; z-index: 9"
+        style="position: absolute; top: 50%; left: 95%; z-index: 9"
         value="0"
         id="pt7"
         onclick="coll(this)"
@@ -224,7 +217,7 @@
       </button>
       <button
         class="btn btn-primary"
-        style="position: absolute; top: 36%; left: 95%; z-index: 9"
+        style="position: absolute; top: 87%; left: 5%; z-index: 9"
         value="0"
         id="pt8"
         onclick="coll(this)"
@@ -233,7 +226,7 @@
       </button>
       <button
         class="btn btn-primary"
-        style="position: absolute; top: 69%; left: 5%; z-index: 9"
+        style="position: absolute; top: 87%; left: 50%; z-index: 9"
         value="0"
         id="pt9"
         onclick="coll(this)"
@@ -242,33 +235,15 @@
       </button>
       <button
         class="btn btn-primary"
-        style="position: absolute; top: 69%; left: 35%; z-index: 9"
+        style="position: absolute; top: 87%; left: 95%; z-index: 9"
         value="0"
         id="pt10"
         onclick="coll(this)"
       >
         10
       </button>
-      <button
-        class="btn btn-primary"
-        style="position: absolute; top: 69%; left: 65%; z-index: 9"
-        value="0"
-        id="pt11"
-        onclick="coll(this)"
-      >
-        11
-      </button>
-      <button
-        class="btn btn-primary"
-        style="position: absolute; top: 69%; left: 95%; z-index: 9"
-        value="0"
-        id="pt12"
-        onclick="coll(this)"
-      >
-        12
-      </button>
     </div>
-
+    
     <div
       class="modal fade"
       id="staticBackdrop"
@@ -294,11 +269,12 @@
           <div class="modal-body">
             <ol>
               <li>
-                Click on "Start Calibration" button to start Calibrating your camera.
+                Click on "Start Calibration" button to start Calibrating your
+                camera.
               </li>
               <li>
-                Upon seeing the video, make sure to fit your face into the square. 
-                The square will turn green once face is detected.
+                Upon seeing the video, make sure to fit your face into the
+                square. The square will turn green once face is detected.
               </li>
               <li>
                 Focus on a number and click 5 times until it disappears. Repeat
@@ -311,12 +287,14 @@
             </ol>
           </div>
           <div class="modal-footer">
+            <button id="closeBtn" type="button" class="btn btn-default" data-bs-dismiss="modal">Close & load saved model </button>
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-primary"
               data-bs-dismiss="modal"
+              onclick="showCalibPoints()"
             >
-              Close
+              Calibrate
             </button>
           </div>
         </div>

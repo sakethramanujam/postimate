@@ -1,7 +1,27 @@
+/*
+ * This function calculates a measurement for how precise 
+ * the eye tracker currently is which is displayed to the user
+ */
+function calculatePrecision(past50Array) {
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+
+  // Retrieve the last 50 gaze prediction points
+  var x50 = past50Array[0];
+  var y50 = past50Array[1];
+
+  // Calculate the position of the point the user is staring at
+  var staringPointX = windowWidth / 2;
+  var staringPointY = windowHeight / 2;
+
+  var precisionPercentages = new Array(50);
+  calculatePrecisionPercentages(precisionPercentages, windowHeight, x50, y50, staringPointX, staringPointY);
+  var precision = calculateAverage(precisionPercentages);
 
   // Return the precision measurement as a rounded percentage
   return Math.round(precision);
 };
+
 
 /*
  * Calculate percentage accuracy for each prediction based on distance of
