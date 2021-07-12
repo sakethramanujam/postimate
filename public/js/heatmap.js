@@ -11,7 +11,13 @@ let heat = "";
 let frame = null;
 function getNewImage(imgId) {
   const img = document.getElementById(imgId);
-  img.src = "https://picsum.photos/1000?" + Math.random();
+  //img.src = "https://picsum.photos/1000?" + Math.random();
+  if (imgId === "img-1"){
+    img.src = "/img/square_1.jpg"
+  }
+  else{
+    img.src = "/img/square_2.jpg"
+  }
 }
 
 function resize() {
