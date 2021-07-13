@@ -1,6 +1,8 @@
 # Postimate
 
-A [webgazer.js](https://webgazer.cs.brown.edu/) wrapper in vanillaJS to allow form downloading tracking data using indexdb.
+An experimental wrapper around [webgazer.js](https://webgazer.cs.brown.edu/) in VanillaJS to allow for heatmaps with vision tracking. 
 
-All of the processing happens on clientside including data bundling.
 
+Credits
+- [webgazer.js](https://webgazer.cs.brown.edu/)
+- [simpleheat.js](https://github.com/mourner/simpleheat)
